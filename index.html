@@ -3,86 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fullscreen Video BG</title>
+    <title>porno!</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-            background: #000;
-            overflow: hidden;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #000;
+            background-color: #0f172a;
             color: #f8fafc;
-            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
             text-align: center;
+            padding: 20px;
         }
-
-        .video-bg {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            background: #000;
-            filter: brightness(0.8);
+        .container {
+            max-width: 600px;
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid #334155;
         }
-
-        .sound-toggle {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            z-index: 2;
-            padding: 10px 16px;
-            border: 1px solid rgba(255,255,255,0.22);
-            border-radius: 999px;
-            background: rgba(15, 23, 42, 0.6);
-            color: #fff;
-            backdrop-filter: blur(8px);
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 0.02em;
+        h1 {
+            color: #38bdf8;
+            margin-bottom: 16px;
+            font-size: 2.2rem;
         }
-
-        @media (prefers-reduced-motion: reduce) {
-            .video-bg { display: none; }
-            body { background: #000; }
+        p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0284c7;
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
-    <video
-        id="bg-video"
-        class="video-bg"
-        autoplay
-        muted
-        loop
-        playsinline
-    >
-        <source src="https://drive.google.com/uc?export=download&id=1_0T18IBnpwILH8dOdkS7W4Kga1I8xdhr" type="video/mp4">
-    </video>
-
-    <button id="sound-toggle" class="sound-toggle" aria-label="Toggle sound">Ses Aç</button>
-
-    <script>
-        const video = document.getElementById('bg-video');
-        const toggle = document.getElementById('sound-toggle');
-
-        toggle.addEventListener('click', () => {
-            video.muted = !video.muted;
-            toggle.textContent = video.muted ? 'Ses Aç' : 'Ses Kapat';
-        });
-    </script>
+    <div class="container">
+        <h1>efe ne oçsun ya!</h1>
+        <p>bakın beyler bu da benimki.</p>
+        <a href="#" class="btn">İletişime Geç</a>
+    </div>
 </body>
 </html>
