@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sa!</title>
+    <title>max</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,7 +12,7 @@
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f172a;
+            background-color: #0f172a; /* fallback */
             color: #f8fafc;
             display: flex;
             justify-content: center;
@@ -20,10 +20,25 @@
             min-height: 100vh;
             text-align: center;
             padding: 20px;
+            overflow: hidden; /* video taşmalarını gizle */
         }
+
+        /* Video arkaplan */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1; /* içerik elementlerinin arkasında kalsın */
+        }
+
         .container {
+            position: relative;
+            z-index: 1;
             max-width: 600px;
-            background: #1e293b;
+            background: rgba(30,41,59,0.75); /* şeffaf arka plan, okunurluk için */
             padding: 40px;
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
@@ -54,13 +69,37 @@
             background-color: #0284c7;
             color: #ffffff;
         }
+
+        /* Erişilebilirlik: kullanıcı "reduced motion" tercih ederse videoyu kapat */
+        @media (prefers-reduced-motion: reduce) {
+            .video-bg { display: none; }
+        }
     </style>
 </head>
 <body>
+    <!-- Arka plan video: uploads ettiğiniz dosyaların yollarına göre güncelleyin (videos/bg.webm / videos/bg.mp4) -->
+    <video id="bg-video" class="video-bg" autoplay muted loop playsinline poster="videos/poster.jpg">
+        <source src="videos/bg.webm" type="video/webm">
+        <source src="videos/bg.mp4" type="video/mp4">
+        <!-- Eğer tarayıcı video desteklemiyorsa poster/resim gösterilecek -->
+    </video>
+
     <div class="container">
-        <h1>as!</h1>
-        <p>bakın beyler bu da benimki.</p>
-        <a href="#" class="btn">İletişime Geç</a>
+        <h1>verstappen</h1>
+        <p>çok büyük adam</p>
+        <a href="#" class="btn">ocon için 10 saniye penaltı</a>
     </div>
+
+    <script>
+      // Eğer kullanıcı reduced-motion tercih etmişse videoyu durdur
+      (function(){
+        const vid = document.getElementById('bg-video');
+        if (!vid) return;
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          vid.pause();
+          vid.removeAttribute('autoplay');
+        }
+      })();
+    </script>
 </body>
 </html>
