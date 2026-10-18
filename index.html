@@ -6,16 +6,17 @@
     <title>max</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body {
+            height: 100%;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f172a;
+            background-color: #000; /* kenarlardaki boş alanlar tamamen siyah olsun */
             color: #f8fafc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: block;
             min-height: 100vh;
             text-align: center;
-            padding: 20px;
+            padding: 0;
             overflow: hidden;
         }
 
@@ -23,6 +24,7 @@
             position: fixed;
             inset: 0;
             z-index: -1;
+            background: #000;
             overflow: hidden;
             pointer-events: none;
         }
@@ -32,61 +34,21 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 177.78vh;
-            height: 100vh;
+            /* kenarlarda boşluk kalmaması için en azını tam kapla */
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
             border: 0;
         }
 
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 600px;
-            background: rgba(30, 41, 59, 0.75);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border: 1px solid #334155;
-        }
+        /* Konuşma balonu kaldırıldı - içerik yok */
 
-        h1 {
-            color: #38bdf8;
-            margin-bottom: 16px;
-            font-size: 2.2rem;
-        }
-
-        p {
-            color: #94a3b8;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: #38bdf8;
-            color: #0f172a;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #0284c7;
-            color: #ffffff;
-        }
-
+        /* Erişilebilirlik: reduced-motion tercih eden kullanıcılar için video arkaplanını gizle */
         @media (prefers-reduced-motion: reduce) {
             .youtube-bg { display: none; }
         }
 
-        @media (max-aspect-ratio: 16/9) {
-            .youtube-bg iframe {
-                width: 100vw;
-                height: 56.25vw;
-            }
-        }
     </style>
 </head>
 <body>
@@ -97,12 +59,6 @@
             frameborder="0"
             allow="autoplay; encrypted-media; picture-in-picture"
             allowfullscreen></iframe>
-    </div>
-
-    <div class="container">
-        <h1>Hoş geldiniz</h1>
-        <p>Siteye hoş geldiniz — iletişime geçmek için butona tıklayın.</p>
-        <a href="#" class="btn">İletişime Geç</a>
     </div>
 </body>
 </html>
