@@ -3,62 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>max</title>
+    <title>Fullscreen Video BG</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body {
-            height: 100%;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #000; /* kenarlardaki boş alanlar tamamen siyah olsun */
+            background: #000;
             color: #f8fafc;
             display: block;
             min-height: 100vh;
             text-align: center;
-            padding: 0;
-            overflow: hidden;
         }
 
-        .youtube-bg {
+        .video-bg {
             position: fixed;
             inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             z-index: -1;
             background: #000;
-            overflow: hidden;
-            pointer-events: none;
+            filter: brightness(0.8);
         }
 
-        .youtube-bg iframe {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            /* kenarlarda boşluk kalmaması için en azını tam kapla */
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            border: 0;
+        .sound-toggle {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 2;
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.6);
+            color: #fff;
+            backdrop-filter: blur(8px);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: background 0.2s ease;
         }
 
-        /* Konuşma balonu kaldırıldı - içerik yok */
+        .sound-toggle:hover {
+            background: rgba(15, 23, 42, 0.85);
+        }
 
-        /* Erişilebilirlik: reduced-motion tercih eden kullanıcılar için video arkaplanını gizle */
         @media (prefers-reduced-motion: reduce) {
-            .youtube-bg { display: none; }
+            .video-bg { display: none; }
+            body { background: #000; }
         }
-
     </style>
 </head>
 <body>
-    <div class="youtube-bg" aria-hidden="true">
-        <iframe
-            src="https://www.youtube.com/embed/XJkfA0Wgj7g?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=XJkfA0Wgj7g&modestbranding=1&iv_load_policy=3"
-            title="Background video"
-            frameborder="0"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowfullscreen></iframe>
-    </div>
+    <video
+        id="bg-video"
+        class="video-bg"
+        autoplay
+        muted
+        loop
+        playsinline
+    >
+        <source src="https://drive.google.com/uc?export=download&id=1_0T18IBnpwILH8dOdkS7W4Kga1I8xdhr" type="video/mp4">
+    </video>
+
+    <button id="sound-toggle" class="sound-toggle" aria-label="Toggle sound">Ses Aç</button>
+
+    <script>
+        const video = document.getElementById('bg-video');
+        const toggle = document.getElementById('sound-toggle');
+
+        toggle.addEventListener('click', () => {
+            video.muted = !video.muted;
+            toggle.textContent = video.muted ? 'Ses Aç' : 'Ses Kapat';
+        });
+    </script>
 </body>
 </html>
