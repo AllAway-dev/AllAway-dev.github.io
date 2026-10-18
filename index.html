@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>max</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f172a; /* fallback */
+            background-color: #0f172a;
             color: #f8fafc;
             display: flex;
             justify-content: center;
@@ -20,41 +16,51 @@
             min-height: 100vh;
             text-align: center;
             padding: 20px;
-            overflow: hidden; /* video taşmalarını gizle */
+            overflow: hidden;
         }
 
-        /* Video arkaplan */
-        .video-bg {
+        .youtube-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .youtube-bg iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 177.78vh;
             height: 100vh;
-            object-fit: cover;
-            z-index: -1; /* içerik elementlerinin arkasında kalsın */
+            border: 0;
         }
 
         .container {
             position: relative;
             z-index: 1;
             max-width: 600px;
-            background: rgba(30,41,59,0.75); /* şeffaf arka plan, okunurluk için */
+            background: rgba(30, 41, 59, 0.75);
             padding: 40px;
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             border: 1px solid #334155;
         }
+
         h1 {
             color: #38bdf8;
             margin-bottom: 16px;
             font-size: 2.2rem;
         }
+
         p {
             color: #94a3b8;
             font-size: 1.1rem;
             line-height: 1.6;
             margin-bottom: 24px;
         }
+
         .btn {
             display: inline-block;
             background-color: #38bdf8;
@@ -65,41 +71,38 @@
             font-weight: bold;
             transition: background 0.3s ease;
         }
+
         .btn:hover {
             background-color: #0284c7;
             color: #ffffff;
         }
 
-        /* Erişilebilirlik: kullanıcı "reduced motion" tercih ederse videoyu kapat */
         @media (prefers-reduced-motion: reduce) {
-            .video-bg { display: none; }
+            .youtube-bg { display: none; }
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .youtube-bg iframe {
+                width: 100vw;
+                height: 56.25vw;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Arka plan video: uploads ettiğiniz dosyaların yollarına göre güncelleyin (videos/bg.webm / videos/bg.mp4) -->
-    <video id="bg-video" class="video-bg" autoplay muted loop playsinline poster="videos/poster.jpg">
-        <source src="videos/bg.webm" type="video/webm">
-        <source src="videos/bg.mp4" type="video/mp4">
-        <!-- Eğer tarayıcı video desteklemiyorsa poster/resim gösterilecek -->
-    </video>
-
-    <div class="container">
-        <h1>verstappen</h1>
-        <p>çok büyük adam</p>
-        <a href="#" class="btn">ocon için 10 saniye penaltı</a>
+    <div class="youtube-bg" aria-hidden="true">
+        <iframe
+            src="https://www.youtube.com/embed/XJkfA0Wgj7g?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=XJkfA0Wgj7g&modestbranding=1&iv_load_policy=3"
+            title="Background video"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen></iframe>
     </div>
 
-    <script>
-      // Eğer kullanıcı reduced-motion tercih etmişse videoyu durdur
-      (function(){
-        const vid = document.getElementById('bg-video');
-        if (!vid) return;
-        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          vid.pause();
-          vid.removeAttribute('autoplay');
-        }
-      })();
-    </script>
+    <div class="container">
+        <h1>Hoş geldiniz</h1>
+        <p>Siteye hoş geldiniz — iletişime geçmek için butona tıklayın.</p>
+        <a href="#" class="btn">İletişime Geç</a>
+    </div>
 </body>
 </html>
